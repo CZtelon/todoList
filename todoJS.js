@@ -136,3 +136,141 @@ modalCreateTaskBtn.addEventListener("click", () => {
         taskModal.style.display = "none";
     }
 });
+
+/* ===============================
+   TAB FILTERING FUNCTIONALITY
+================================= */
+
+// Get all tab buttons
+const tabs = document.querySelectorAll('.tab');
+const taskListContainer = document.getElementById('taskList');
+
+// Add event listeners to all tabs
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        tabs.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Get the filter type from data-filter attribute
+        const filter = tab.getAttribute('data-filter');
+        filterTasks(filter);
+    });
+});
+
+// Function to filter and display tasks
+function filterTasks(filter) {
+    const allTasks = document.querySelectorAll('.task');
+    
+    allTasks.forEach(task => {
+        task.style.display = 'flex'; // Reset display
+        
+        switch(filter) {
+            case 'all':
+                // Show all tasks
+                task.style.display = 'flex';
+                break;
+                
+            case 'todo':
+                // Show only incomplete tasks
+                if (task.classList.contains('completed')) {
+                    task.style.display = 'none';
+                }
+                break;
+                
+            case 'completed':
+                // Show only completed tasks
+                if (!task.classList.contains('completed')) {
+                    task.style.display = 'none';
+                }
+                break;
+                
+            case 'date':
+                // Sort by date (show all but reorder)
+                sortTasksByDate();
+                break;
+                
+            case 'project':
+                // Sort by project (show all but reorder)
+                sortTasksByProject();
+                break;
+                
+            case 'tag':
+                // Sort by tag (show all but reorder)
+                sortTasksByTag();
+                break;
+        }
+    });
+}
+
+// Function to sort tasks by date
+function sortTasksByDate() {
+    const tasks = Array.from(document.querySelectorAll('.task'));
+    
+    tasks.sort((a, b) => {
+        const dateA = a.querySelector('span:nth-child(2)').textContent;
+        const dateB = b.querySelector('span:nth-child(2)').textContent;
+        
+        // Handle empty dates by putting them at the end
+        if (!dateA && !dateB) return 0;
+        if (!dateA) return 1;
+        if (!dateB) return -1;
+        
+        return new Date(dateA) - new Date(dateB);
+    });
+    
+    // Clear and re-append sorted tasks
+    taskListContainer.innerHTML = '';
+    tasks.forEach(task => taskListContainer.appendChild(task));
+}
+
+// Function to sort tasks by project
+function sortTasksByProject() {
+    const tasks = Array.from(document.querySelectorAll('.task'));
+    
+    tasks.sort((a, b) => {
+        const taskTextA = a.querySelector('span:first-child').textContent;
+        const taskTextB = b.querySelector('span:first-child').textContent;
+        
+        // Extract project from [project] format
+        const projectA = taskTextA.match(/\[([^\]]+)\]/)?.[1] || '';
+        const projectB = taskTextB.match(/\[([^\]]+)\]/)?.[1] || '';
+        
+        // Sort alphabetically, empty projects go to end
+        if (!projectA && !projectB) return 0;
+        if (!projectA) return 1;
+        if (!projectB) return -1;
+        
+        return projectA.localeCompare(projectB);
+    });
+    
+    // Clear and re-append sorted tasks
+    taskListContainer.innerHTML = '';
+    tasks.forEach(task => taskListContainer.appendChild(task));
+}
+
+// Function to sort tasks by tag
+function sortTasksByTag() {
+    const tasks = Array.from(document.querySelectorAll('.task'));
+    
+    tasks.sort((a, b) => {
+        const taskTextA = a.querySelector('span:first-child').textContent;
+        const taskTextB = b.querySelector('span:first-child').textContent;
+        
+        // Extract tag from #tag format
+        const tagA = taskTextA.match(/#(\w+)/)?.[1] || '';
+        const tagB = taskTextB.match(/#(\w+)/)?.[1] || '';
+        
+        // Sort alphabetically, empty tags go to end
+        if (!tagA && !tagB) return 0;
+        if (!tagA) return 1;
+        if (!tagB) return -1;
+        
+        return tagA.localeCompare(tagB);
+    });
+    
+    // Clear and re-append sorted tasks
+    taskListContainer.innerHTML = '';
+    tasks.forEach(task => taskListContainer.appendChild(task));
+}
