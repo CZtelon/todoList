@@ -83,18 +83,18 @@ To manage the action buttons within each task, Flexbox was applied to a containe
 
 CSS Code
 
-CSS
+```CSS
 
 .taskButtons {
   display: flex;
   gap: 0.5rem;
 }
-
+```
 Benefits
 
-    Buttons are aligned neatly side by side.
+  Buttons are aligned neatly side by side.
 
-    It's easier to maintain and add new buttons in the future.
+  It's easier to maintain and add new buttons in the future.
 
 2. Completed Task Stamp
 
@@ -102,7 +102,7 @@ A visual fix was implemented for completed tasks using a CSS pseudo-element to a
 
 CSS Code
 
-CSS
+```CSS
 
 .task.completed {
   background: #cce6e6;
@@ -115,7 +115,7 @@ CSS
   font-size: 1rem;
   margin-left: 10px;
 }
-
+```
 Purpose
 
 A green "DONE" label is added to the task line, restricted to the task element via the .task.completed::after pseudo-element.
@@ -126,7 +126,7 @@ To improve user workflow, keydown listeners were added to the input fields, allo
 
 JavaScript Code
 
-JavaScript
+```JavaScript
 
 [taskTitle, taskDate].forEach(el => {
   el.addEventListener('keydown', (e) => {
@@ -136,16 +136,17 @@ JavaScript
     }
   });
 });
-
+```
 4. Local Storage for User Name
 
 The user's name is stored in Local Storage to provide a persistent, personalized experience and skip the initial modal on subsequent visits.
 
 JavaScript Code
 
-JavaScript
+```JavaScript
 
 localStorage.setItem("userName", name);
+```
 
 5. Folder Structure and Paths
 
@@ -153,29 +154,28 @@ The application structure was validated to ensure all files were correctly linke
 
 HTML Links
 
-HTML
+```HTML
 
 <link rel="stylesheet" href="todoCSS.css">
 <script src="todoJS.js"></script>
-
+```
 Outcome
 
 This structure solved visual overflows, improved usability, and ensured the app worked correctly both locally (with Live Server) and on GitHub Pages.
 
 Key Takeaways
 
-    DOM Structure Matters – Properly structuring elements in HTML/JS affects layout more than CSS alone.
+  DOM Structure Matters – Properly structuring elements in HTML/JS affects layout more than CSS alone.
 
-    Flexbox Is Powerful but Tricky – justify-content: space-between doesn't guarantee element proximity; group elements in containers when necessary.
-
+  Flexbox Is Powerful but Tricky – justify-content: space-between doesn't guarantee element proximity; group elements in containers when necessary.
     Dynamic Elements Require Careful Event Handling – Always attach event listeners after the dynamic elements have been created and added to the DOM.
 
-    Incremental Problem Solving – Tackling one challenge at a time prevents overwhelming complexity and ensures better focus.
+  Incremental Problem Solving – Tackling one challenge at a time prevents overwhelming complexity and ensures better focus.
 
-    CSS Pseudo-elements Are Handy – They are extremely useful for adding inline stamps like "DONE" without needing to modify the HTML structure.
+  CSS Pseudo-elements Are Handy – They are extremely useful for adding inline stamps like "DONE" without needing to modify the HTML structure.
 
-    Keyboard UX Matters – Handling the Enter key significantly improves accessibility and user experience.
+  Keyboard UX Matters – Handling the Enter key significantly improves accessibility and user experience.
 
-    Local Storage Simplifies Persistence – It offers a lightweight solution for storing session data without the need for a backend.
+  Local Storage Simplifies Persistence – It offers a lightweight solution for storing session data without the need for a backend.
 
-    Reflective Iteration Strengthens Understanding – Documenting the steps and solutions helps with knowledge retention and provides a clear record of why specific approaches worked.
+  Reflective Iteration Strengthens Understanding – Documenting the steps and solutions helps with knowledge retention and provides a clear record of why specific approaches worked.
