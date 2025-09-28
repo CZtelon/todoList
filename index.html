@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link rel="stylesheet" href="todoCSS.css">
+</head>
+
+<body>
+    <!-- 🔹 USER NAME PROMPT MODAL -->
+    <div id="nameModal" class="modal">
+        <div class="modal-content">
+            <h2>Welcome! What’s your name?</h2>
+            <input type="text" id="userNameInput" placeholder="Enter your name">
+            <button id="saveNameBtn">Continue</button>
+        </div>
+    </div>
+
+    <!-- 🔹 HEADER -->
+    <header>
+        <h1 id="pageTitle"></h1>
+        <button id="themeToggle">🌙</button>
+    </header>
+
+    <!-- 🔹 NAVIGATION TABS -->
+    <nav>
+        <button class="tab active" data-filter="all">All</button>
+        <button class="tab" data-filter="todo">To Do</button>
+        <button class="tab" data-filter="completed">Completed</button>
+        <button class="tab" data-filter="date">By Date</button>
+        <button class="tab" data-filter="project">By Project</button>
+        <button class="tab" data-filter="tag">By Tag</button>
+    </nav>
+
+    <!-- 🔹 TASK CREATION LINE -->
+    <section id="taskCreation">
+        <input type="text" id="taskTitle" placeholder="New task">
+        <input type="date" id="taskDate">
+        <button id="expandOptions">⋮</button>
+        <button id="createTaskBtn">Create Task</button>
+    </section>
+
+    <!-- 🔹 EXPANDED TASK CREATION MODAL -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <h2>New Task Details</h2>
+            <label>Task Title</label>
+            <input type="text" id="modalTaskTitle">
+            <label>Due Date</label>
+            <input type="date" id="modalTaskDate">
+            <label>Project</label>
+            <input type="text" id="modalTaskProject">
+            <label>Tag</label>
+            <input type="text" id="modalTaskTag">
+            <button id="modalCreateTaskBtn">Create Task</button>
+            <button id="closeTaskModal">Cancel</button>
+        </div>
+    </div>
+
+    <!-- 🔹 TASK LIST -->
+    <section id="taskList"></section>
+
+    <script src="todoJS.js"></script>
+</body>
+
+</html>
